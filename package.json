@@ -40,5 +40,8 @@
     "scripts": {
         "package": "vsce package --no-dependencies",
         "publish": "vsce publish --no-dependencies"
+    },
+    "devDependencies": {
+        "@vscode/vsce": "^3.7.1"
     }
 }
