@@ -1,0 +1,44 @@
+{
+    "name": "1c-platform-extension-pack",
+    "displayName": "1C Platform Extension Pack",
+    "description": "Набор расширений для разработки на платформе 1С. 1C Platform Tools (инструменты, проекты, отладка); MCP для агентов Cursor/VS Code и поддержка языка 1С (BSL).",
+    "version": "1.0.0",
+    "publisher": "yellow-hammer",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yellow-hammer/vscode-1c-platform-extension-pack.git"
+    },
+    "homepage": "https://github.com/yellow-hammer/vscode-1c-platform-extension-pack",
+    "bugs": {
+        "url": "https://github.com/yellow-hammer/vscode-1c-platform-extension-pack/issues"
+    },
+    "icon": "resources/1c-icon.png",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Extension Packs",
+        "Programming Languages"
+    ],
+    "keywords": [
+        "1c-platform-tools",
+        "1c",
+        "mcp",
+        "bsl",
+        "language-1c-bsl",
+        "1c-bsl",
+        "bsl-language-server",
+        "extension-pack"
+    ],
+    "extensionPack": [
+        "yellow-hammer.1c-platform-tools",
+        "yellow-hammer.mcp-1c-platform-tools",
+        "xDrivenDevelopment.language-1c-bsl"
+    ],
+    "extensionDependencies": [],
+    "scripts": {
+        "package": "vsce package --no-dependencies",
+        "publish": "vsce publish --no-dependencies"
+    }
+}
