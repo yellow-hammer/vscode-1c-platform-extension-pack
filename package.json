@@ -1,6 +1,6 @@
 {
     "name": "1c-platform-extension-pack",
-    "displayName": "1C Platform Extension Pack",
+    "displayName": "1C: Platform Extension Pack",
     "description": "Набор расширений для разработки на платформе 1С. 1C Platform Tools (инструменты, проекты, отладка); MCP для агентов Cursor/VS Code и поддержка языка 1С (BSL).",
     "version": "1.0.0",
     "publisher": "yellow-hammer",
