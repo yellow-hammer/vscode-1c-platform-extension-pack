@@ -1,0 +1,146 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Запускается при создании тега, начинающегося с 'v'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Версия релиза (например, v1.0.0, v1.0.0-alpha.1, v1.0.0-beta.2, v1.0.0-rc.1)'
+        required: true
+        type: string
+      skip_publish:
+        description: 'Пропустить публикацию в маркетплейсы (VS Code Marketplace и Open VSX Registry)'
+        required: false
+        type: boolean
+        default: false
+      draft:
+        description: 'Создать draft (черновик) релиз. Draft релизы не публикуются публично, но доступны для просмотра и тестирования.'
+        required: false
+        type: boolean
+        default: false
+      prerelease:
+        description: 'Создать prerelease (предварительный релиз). Prerelease помечается как нестабильная версия (alpha, beta, rc).'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Необходимо для создания релизов
+      packages: write # Необходимо для публикации в VS Code Marketplace
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Extract version from tag or input
+        id: tag_version
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+            echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          else
+            VERSION=${{ github.event.inputs.version }}
+            VERSION=${VERSION#v}
+            echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update package version
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          # Определяем основную ветку (main или master)
+          if git show-ref --verify --quiet refs/remotes/origin/main; then
+            BRANCH="main"
+          elif git show-ref --verify --quiet refs/remotes/origin/master; then
+            BRANCH="master"
+          else
+            BRANCH=$(git ls-remote --heads origin | grep -E '(main|master)' | head -1 | sed 's/.*refs\/heads\///' || echo "main")
+          fi
+          echo "Switching to branch: $BRANCH"
+          git checkout $BRANCH
+
+          # Обновляем версию в package.json
+          npm version ${{ steps.tag_version.outputs.version }} --no-git-tag-version || echo "Version already matches, skipping update"
+
+          # Коммитим изменения версии, если они есть
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add package.json
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(release): bump version to ${{ steps.tag_version.outputs.version }}"
+            git push origin $BRANCH
+          fi
+
+      - name: Create tag if not exists (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          TAG="v${{ steps.tag_version.outputs.version }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists, skipping creation"
+          else
+            echo "Creating tag $TAG"
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git tag -a "$TAG" -m "Release $TAG"
+            git push origin "$TAG"
+          fi
+
+      - name: Package extension
+        run: npx vsce package
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag_version.outputs.version }}
+          files: |
+            *.vsix
+          body: |
+            ## Версия ${{ steps.tag_version.outputs.version }}
+
+            Пакет расширений для платформы 1С включает:
+            - 1C Platform Tools (yellow-hammer.1c-platform-tools)
+            - Language 1C (BSL) (xDrivenDevelopment.language-1c-bsl)
+
+            ### Установка
+
+            Скачайте файл `.vsix` и установите через VS Code:
+            - `Ctrl+Shift+P` → `Extensions: Install from VSIX...`
+
+            Или установите из маркетплейсов:
+            - [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=yellow-hammer.1c-platform-extension-pack)
+            - [Open VSX Registry](https://open-vsx.org/extension/yellow-hammer/1c-platform-extension-pack)
+          draft: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.draft == 'true' || false }}
+          prerelease: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.prerelease == 'true' || false }}
+
+      - name: Publish to Open VSX Registry
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true'
+        uses: HaaLeo/publish-vscode-extension@v1
+        id: publishToOpenVSX
+        with:
+          pat: ${{ secrets.OVSX_TOKEN }}
+          skipDuplicate: true
+
+      - name: Publish to Visual Studio Marketplace
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true'
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          pat: ${{ secrets.VSCE_PAT }}
+          registryUrl: https://marketplace.visualstudio.com
+          extensionFile: ${{ steps.publishToOpenVSX.outputs.vsixPath }}
+          skipDuplicate: true
