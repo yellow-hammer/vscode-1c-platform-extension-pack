@@ -1,0 +1,13 @@
+.git/
+.github/
+.vscode/
+.gitignore
+.vscodeignore
+*.vsix
+.env
+.env.local
+*.log
+CONTRIBUTING.md
+node_modules/
+dist/
+.DS_Store
