@@ -12,7 +12,7 @@
 - Первый выпуск пакета расширений для платформы 1С.
 - Включено расширение 1C: Platform tools (`yellow-hammer.1c-platform-tools`).
 - Включено расширение 1C: Platform Tools MCP (`yellow-hammer.mcp-1c-platform-tools`).
-- Включено расширение Language 1C (BSL) (`xDrivenDevelopment.language-1c-bsl`).
+- Включено расширение Language 1C (BSL) (`1c-syntax.language-1c-bsl`).
 - README с единым форматом описания расширений, ссылками на Marketplace и Open VSX.
 - CONTRIBUTING с инструкциями по сборке и публикации.
 - GitHub Actions workflow для релизов.

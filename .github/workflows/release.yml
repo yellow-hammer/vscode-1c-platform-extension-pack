@@ -115,7 +115,7 @@ jobs:
             Пакет расширений для платформы 1С включает:
             - 1C Platform Tools (yellow-hammer.1c-platform-tools)
             - 1C Platform Tools MCP (yellow-hammer.mcp-1c-platform-tools)
-            - Language 1C (BSL) (xDrivenDevelopment.language-1c-bsl)
+            - Language 1C (BSL) (1c-syntax.language-1c-bsl)
 
             ### Установка
 

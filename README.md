@@ -26,10 +26,10 @@ MCP-сервер для запуска команд 1C Platform Tools через
 
 ### 3. [Language 1C (BSL)](https://github.com/1c-syntax/vsc-language-1c-bsl)
 
-- **Издатель:** xDrivenDevelopment
-- **ID расширения:** `xDrivenDevelopment.language-1c-bsl`
-- **Marketplace:** [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=xDrivenDevelopment.language-1c-bsl)
-- **Open VSX:** [Open VSX Registry](https://open-vsx.org/extension/xDrivenDevelopment/language-1c-bsl)
+- **Издатель:** 1c-syntax
+- **ID расширения:** `1c-syntax.language-1c-bsl`
+- **Marketplace:** [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=1c-syntax.language-1c-bsl)
+- **Open VSX:** [Open VSX Registry](https://open-vsx.org/extension/1c-syntax/language-1c-bsl)
 
 Подсветка синтаксиса, автодополнение и поддержка языка 1С BSL (BSL Language Server): диагностика, навигация, форматирование.
 

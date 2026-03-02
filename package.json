@@ -34,7 +34,7 @@
     "extensionPack": [
         "yellow-hammer.1c-platform-tools",
         "yellow-hammer.mcp-1c-platform-tools",
-        "xDrivenDevelopment.language-1c-bsl"
+        "1c-syntax.language-1c-bsl"
     ],
     "extensionDependencies": [],
     "scripts": {
