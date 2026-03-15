@@ -1,5 +1,9 @@
 # Пакет расширений для платформы 1С
 
+[![OpenYellow](https://openyellow.openintegrations.dev/data/badges/1155465357.png)](https://openyellow.org/grid?filter=top&repo=1155465357)
+[![telegram chat](https://img.shields.io/badge/telegram-chat-green.svg)](https://t.me/wonder_yellow)
+[![Ask Devin](https://deepwiki.com/badge.svg)](https://app.devin.ai/org/yellow-hammer/wiki/yellow-hammer/vscode-1c-platform-extension-pack)
+
 Набор расширений VS Code для разработки на платформе 1С
 
 ## Включённые расширения
