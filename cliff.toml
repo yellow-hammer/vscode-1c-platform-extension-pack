@@ -1,0 +1,58 @@
+# git-cliff — конфигурация генерации CHANGELOG.md
+# https://git-cliff.org/docs/configuration
+
+[changelog]
+header = """# Журнал изменений
+
+Все заметные изменения в этом проекте будут задокументированы в этом файле.
+
+Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.0.0/),
+и этот проект придерживается [Semantic Versioning](https://semver.org/lang/ru/).
+"""
+# Шаблон Tera для каждого релиза. https://keats.github.io/tera/docs/#introduction
+body = """{% if version %}
+## [{{ version | trim_start_matches(pat="v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}
+## [Unreleased]
+{% endif %}
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | striptags | trim | upper_first }}
+{% for commit in commits %}
+- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{% if commit.breaking %}[**BREAKING**] {% endif %}{{ commit.message | upper_first }}
+{% endfor %}
+{% endfor %}
+"""
+trim = true
+render_always = true
+
+[git]
+# Разбор коммитов по Conventional Commits; неконвенциональные не попадают в журнал.
+conventional_commits = true
+filter_unconventional = true
+split_commits = false
+protect_breaking_commits = false
+# Группы разделов журнала (комментарий <!-- N --> задаёт порядок).
+commit_parsers = [
+    { message = "^feat", group = "<!-- 0 -->Новые возможности" },
+    { message = "^fix", group = "<!-- 1 -->Исправления" },
+    { message = "^refactor", group = "<!-- 2 -->Рефакторинг" },
+    { message = "^doc", group = "<!-- 3 -->Документация" },
+    { message = "^perf", group = "<!-- 4 -->Производительность" },
+    { message = "^style", group = "<!-- 5 -->Стиль" },
+    { message = "^test", group = "<!-- 6 -->Тестирование" },
+    { message = "^chore\\(release\\)", skip = true },
+    { message = "^chore\\(deps.*\\)", skip = true },
+    { message = "^chore\\(pr\\)", skip = true },
+    { message = "^chore\\(pull\\)", skip = true },
+    { message = "^chore|^ci", group = "<!-- 7 -->Обслуживание" },
+    { body = ".*security", group = "<!-- 8 -->Безопасность" },
+    { message = "^revert", group = "<!-- 9 -->Откаты" },
+    { message = ".*", group = "<!-- 10 -->Прочее" },
+]
+filter_commits = false
+link_parsers = []
+use_branch_tags = false
+topo_order = false
+topo_order_commits = true
+sort_commits = "oldest"
+recurse_submodules = false

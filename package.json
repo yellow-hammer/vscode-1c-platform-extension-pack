@@ -39,7 +39,8 @@
     "extensionDependencies": [],
     "scripts": {
         "package": "vsce package --no-dependencies",
-        "publish": "vsce publish --no-dependencies"
+        "publish": "vsce publish --no-dependencies",
+        "changelog": "git-cliff --config cliff.toml --output CHANGELOG.md"
     },
     "devDependencies": {
         "@vscode/vsce": "^3.7.1"
