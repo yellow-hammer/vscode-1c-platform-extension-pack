@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Package (VSIX)",
+			"label": "Собрать расширение (VSIX)",
 			"type": "npm",
 			"script": "package",
 			"problemMatcher": [],
@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"label": "Publish",
+			"label": "Опубликовать в Marketplace",
 			"type": "npm",
 			"script": "publish",
 			"problemMatcher": [],
@@ -24,6 +24,17 @@
 				"reveal": "always",
 				"panel": "new"
 			}
+		},
+		{
+			"label": "Сгенерировать CHANGELOG",
+			"type": "npm",
+			"script": "changelog",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"group": "build"
 		}
 	]
 }
