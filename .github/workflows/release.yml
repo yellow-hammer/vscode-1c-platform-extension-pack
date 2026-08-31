@@ -44,12 +44,12 @@ jobs:
 
     steps:
       - name: Получить код
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Установить Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: 'npm'
@@ -111,7 +111,7 @@ jobs:
           toolchain: stable
 
       - name: Кэшировать cargo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/bin/
@@ -189,7 +189,7 @@ jobs:
         run: npm run package
 
       - name: Создать GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ steps.ver.outputs.version }}
           files: |
@@ -217,7 +217,7 @@ jobs:
 
       - name: Опубликовать в Open VSX Registry
         if: github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true'
-        uses: HaaLeo/publish-vscode-extension@v1
+        uses: HaaLeo/publish-vscode-extension@v2
         id: publishToOpenVSX
         with:
           pat: ${{ env.OVSX_TOKEN }}
@@ -225,7 +225,7 @@ jobs:
 
       - name: Опубликовать в VS Code Marketplace
         if: github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true'
-        uses: HaaLeo/publish-vscode-extension@v1
+        uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ env.VSCE_PAT }}
           registryUrl: https://marketplace.visualstudio.com
