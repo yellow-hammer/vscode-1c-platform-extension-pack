@@ -4,7 +4,7 @@
 [![telegram chat](resources/badges/telegram-chat.png)](https://t.me/wonder_yellow)
 [![Ask DeepWiki](resources/badges/deepwiki-badge.png)](https://deepwiki.com/yellow-hammer/vscode-1c-platform-extension-pack)
 
-Набор расширений VS Code для разработки на платформе 1С
+Набор расширений для разработки на 1С:Предприятии в VS Code (Cursor, Windsurf, VSCodium): проекты конфигуратора, 1С:EDT и OneScript, MCP для AI-агентов и язык 1С (BSL).
 
 ## Включённые расширения
 
