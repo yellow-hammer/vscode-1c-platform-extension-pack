@@ -2,7 +2,7 @@
     "name": "1c-platform-extension-pack",
     "displayName": "1C: Platform Extension Pack",
     "description": "Набор расширений для разработки на 1С:Предприятии в VS Code (Cursor, Windsurf, VSCodium): 1C: Platform Tools для проектов конфигуратора, 1С:EDT и OneScript, MCP для AI-агентов и поддержка языка 1С (BSL).",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "publisher": "yellow-hammer",
     "license": "MIT",
     "repository": {
