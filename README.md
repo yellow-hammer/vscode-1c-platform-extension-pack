@@ -26,7 +26,7 @@
 - **Marketplace:** [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=yellow-hammer.mcp-1c-platform-tools)
 - **Open VSX:** [Open VSX Registry](https://open-vsx.org/extension/yellow-hammer/mcp-1c-platform-tools)
 
-MCP-сервер для запуска команд 1C Platform Tools через агентов Cursor/VS Code. Требует установленного расширения 1C Platform Tools и включённого IPC.
+MCP-сервер для запуска команд 1C Platform Tools через агентов Cursor/VS Code. Требует установленного расширения 1C Platform Tools.
 
 ### 3. [Language 1C (BSL)](https://github.com/1c-syntax/vsc-language-1c-bsl)
 
@@ -49,7 +49,7 @@ MCP-сервер для запуска команд 1C Platform Tools через
 ## Возможности
 
 - **1C Platform Tools:** панель проектов 1С, дерево инструментов и избранное, команды запуска конфигуратора и отладки, список дел (TODO/FIXME), инициализация структуры проекта, интеграция с vrunner и onec-debug-adapter.
-- **MCP:** вызов команд 1C Platform Tools из агентов (Cursor/VS Code) по протоколу MCP при включённом IPC.
+- **MCP:** вызов команд 1C Platform Tools из агентов (Cursor/VS Code) по протоколу MCP.
 - **Язык 1С (BSL):** подсветка синтаксиса, BSL Language Server (диагностика, переход к определению, форматирование, автодополнение).
 
 ## Участие в развитии
