@@ -5,6 +5,19 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.0.0/),
 и этот проект придерживается [Semantic Versioning](https://semver.org/lang/ru/).
 
+## [1.0.8] - 2026-11-05
+
+
+### Документация
+
+- Убрали из описания MCP требование включённого IPC
+
+
+### Обслуживание
+
+- Убрали из ключевых слов набора 1c-platform-tools, 1c-bsl, bsl-language-server и language-1c-bsl
+
+
 ## [1.0.7] - 2026-09-29
 
 
